@@ -32,9 +32,39 @@ o	Resistor (1kΩ) (if using hardware)
 
 
 ## Program:
+```
+#include<reg51.h>
+sbit wave=P1^0;
+void delay();
+void main()
+{
+	wave=0;
+	while(1)
+	{
+		wave=1;
+		delay();
+		wave=0;
+		delay();
+	}
+}
+void delay()
+{
+unsigned char i;
+TMOD=0X10;
+for(i=0;i<14;i++)
+	{
+		TH1=0X00;
+		TL1=0X00;
+		TR1=1;
+		while(TF1==0);
+		TF1=0;
+	}
+}
+```
+
 
 ## Output:
-
+<img width="1919" height="904" alt="Screenshot 2025-11-10 174634" src="https://github.com/user-attachments/assets/32aee924-2ff8-4ad9-ab70-edac5ebcd892" />
 ## Result:
 The square wave generation using the 8051 microcontroller has been successfully implemented and simulated using Keil and Proteus.
 
